@@ -97,6 +97,36 @@
   .c-cyan{color:var(--cyan);}
   .c-pink{color:var(--pink);}
   .c-blue{color:#6fa8e8;}
+  .dl-section{margin-top:48px;text-align:center;}
+  .dl-section h2{
+    font-family:'JetBrains Mono',monospace;
+    font-size:22px;
+    margin:0 0 6px;
+    letter-spacing:-.02em;
+  }
+  .dl-section p{
+    color:var(--text-dim);
+    font-size:14px;
+    margin:0 0 24px;
+  }
+  .dl-buttons{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+  .dl-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:14px 24px;
+    border-radius:12px;
+    text-decoration:none;
+    color:#0a0d13;
+    font-family:'JetBrains Mono',monospace;
+    font-weight:700;
+    font-size:14px;
+    transition:transform .15s ease,filter .15s ease;
+  }
+  .dl-btn:hover{transform:translateY(-2px);filter:brightness(1.08);}
+  .dl-btn svg{width:18px;height:18px;flex:none;}
+  .btn-android{background:var(--green);}
+  .btn-windows{background:var(--amber);}
   footer{text-align:center;margin-top:56px;color:var(--text-dim);font-size:13px;}
   footer b{color:var(--text);}
 </style>
@@ -152,6 +182,21 @@
       <span class="go">Abrir →</span>
     </a>
   </div>
+
+  <section class="dl-section">
+    <h2><span class="accent">Descargar</span> la aplicación</h2>
+    <p>Instala MyProfile en tu Android o en Windows:</p>
+    <div class="dl-buttons">
+      <a class="dl-btn btn-android" href="instalador/MyProfile.apk" download>
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v12m0 0l-4-4m4 4l4-4M5 17v2a2 2 0 002 2h10a2 2 0 002-2v-2"/></svg>
+        APK (Android)
+      </a>
+      <a class="dl-btn btn-windows" href="https://github.com/Manu-Castillo8-bit/Myprofile-pages/releases/latest/download/Proyecto-Setup.exe">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v12m0 0l-4-4m4 4l4-4M5 17v2a2 2 0 002 2h10a2 2 0 002-2v-2"/></svg>
+        EXE (Windows)
+      </a>
+    </div>
+  </section>
 
   <footer>Proyecto Integrador — <b>MyProfile</b> · Equipo Nexo</footer>
 </div>
