@@ -1,0 +1,1722 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyProfile v1.0 | Tu Organizador Personal Inteligente</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-dark: #0b0e14;
+            --card-bg: #161b26;
+            --accent-cyan: #156d44;
+            --accent-blue: #4b043b;
+            --text-main: #f0f4f8;
+            --text-muted: #94a3b8;
+            --border-color: #232d3f;
+            --success: #7fc065;
+            --danger: #66e782;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .glow-bg {
+            position: fixed;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(0, 198, 255, 0.15) 0%, rgba(0, 0, 0, 0) 70%);
+            top: -100px;
+            left: -100px;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .glow-bg-2 {
+            position: fixed;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(0, 114, 255, 0.15) 0%, rgba(0, 0, 0, 0) 70%);
+            bottom: -150px;
+            right: -150px;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 8%;
+            background: rgba(11, 14, 20, 0.8);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 23px;
+        }
+
+        .logo-icon {
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: #fff;
+            box-shadow: 0 0 15px rgba(200, 214, 3, 0.4);
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, #ffffff, var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--accent-cyan);
+        }
+
+        .btn-main {
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+            color: #fff;
+            padding: 10px 24px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            box-shadow: 0 4px 20px rgba(0, 114, 255, 0.3);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-main:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(0, 198, 255, 0.5);
+        }
+
+        .hero {
+            padding: 90px 8% 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+        }
+
+        .hero-text {
+            max-width: 550px;
+        }
+
+        .badge {
+            background: rgba(0, 198, 255, 0.1);
+            color: var(--accent-cyan);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: 1px solid rgba(0, 198, 255, 0.3);
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .hero-text h1 {
+            font-size: 3rem;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .hero-text p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            padding: 10px 24px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent-cyan);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .hero-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 25px;
+            width: 100%;
+            max-width: 450px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            position: relative;
+        }
+
+        .hero-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 12px;
+        }
+
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            background: var(--success);
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 10px var(--success);
+        }
+
+        .features {
+            padding: 80px 8%;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+        }
+
+        .section-subtitle {
+            color: var(--text-muted);
+            margin-bottom: 50px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .grid-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 30px 20px;
+            text-align: left;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent-cyan);
+            box-shadow: 0 10px 30px rgba(0, 198, 255, 0.15);
+        }
+
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            background: rgba(0, 198, 255, 0.1);
+            color: var(--accent-cyan);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .demo-section {
+            padding: 60px 8%;
+            background: rgba(22, 27, 38, 0.5);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn.active, .tab-btn:hover {
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+            color: #fff;
+            border-color: transparent;
+        }
+
+        .tab-content {
+            display: none;
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .credits-section {
+            padding: 80px 8%;
+            text-align: center;
+        }
+
+        .credits-card {
+            background: linear-gradient(180deg, var(--card-bg) 0%, rgba(11,14,20,1) 100%);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        .students-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .student-item {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border-color);
+            padding: 15px;
+            border-radius: 12px;
+            font-size: 0.9rem;
+        }
+
+        .student-item i {
+            color: var(--accent-cyan);
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        /* ============ MANUAL DE USUARIO ============ */
+        .manual-section {
+            padding: 90px 8%;
+            position: relative;
+        }
+
+        .manual-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 60px;
+        }
+
+        .manual-block {
+            max-width: 1100px;
+            margin: 0 auto 70px;
+        }
+
+        .manual-block-title {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 30px;
+        }
+
+        .manual-block-num {
+            flex-shrink: 0;
+            width: 46px;
+            height: 46px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+            box-shadow: 0 0 20px rgba(0, 198, 255, 0.35);
+        }
+
+        .manual-block-title h3 {
+            font-size: 1.5rem;
+        }
+
+        .manual-block-title span {
+            display: block;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-weight: 400;
+        }
+
+        /* Primeros pasos - tarjetas con captura */
+        .manual-cards-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+        }
+
+        .manual-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 18px;
+            overflow: hidden;
+            transition: all 0.35s ease;
+        }
+
+        .manual-card:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 15px 35px rgba(0, 198, 255, 0.12);
+            transform: translateY(-6px);
+        }
+
+        .manual-card img {
+            width: 100%;
+            display: block;
+            border-bottom: 1px solid var(--border-color);
+            background: #000;
+        }
+
+        .manual-card-body {
+            padding: 22px 24px 26px;
+        }
+
+        .manual-card-body h4 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            font-size: 1.05rem;
+        }
+
+        .manual-card-body h4 i {
+            color: var(--accent-cyan);
+        }
+
+        .manual-card-body p {
+            color: var(--text-muted);
+            font-size: 0.92rem;
+        }
+
+        /* Interfaz principal */
+        .manual-interface {
+            display: grid;
+            grid-template-columns: 1.1fr 1fr;
+            gap: 35px;
+            align-items: center;
+        }
+
+        .manual-interface img {
+            width: 100%;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 20px 45px rgba(0,0,0,0.45);
+        }
+
+        .manual-interface-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .manual-interface-list li {
+            display: flex;
+            gap: 14px;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 16px 18px;
+        }
+
+        .manual-interface-list li i {
+            color: var(--accent-cyan);
+            font-size: 1.1rem;
+            margin-top: 3px;
+        }
+
+        .manual-interface-list li strong {
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .manual-interface-list li p {
+            color: var(--text-muted);
+            font-size: 0.88rem;
+        }
+
+        @media (max-width: 850px) {
+            .manual-interface { grid-template-columns: 1fr; }
+        }
+
+        /* Funciones paso a paso - acordeón */
+        .accordion-item {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            margin-bottom: 16px;
+            overflow: hidden;
+        }
+
+        .accordion-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            padding: 20px 24px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .accordion-head-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .accordion-icon-box {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            background: rgba(0, 198, 255, 0.1);
+            color: var(--accent-cyan);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .accordion-head h4 {
+            font-size: 1.05rem;
+        }
+
+        .accordion-head small {
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        .accordion-chevron {
+            transition: transform 0.3s ease;
+            color: var(--text-muted);
+        }
+
+        .accordion-item.open .accordion-chevron {
+            transform: rotate(180deg);
+            color: var(--accent-cyan);
+        }
+
+        .accordion-panel {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+            border-top: 1px solid transparent;
+        }
+
+        .accordion-item.open .accordion-panel {
+            border-top: 1px solid var(--border-color);
+        }
+
+        .accordion-panel-inner {
+            padding: 24px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 28px;
+            align-items: center;
+        }
+
+        @media (max-width: 850px) {
+            .accordion-panel-inner { grid-template-columns: 1fr; }
+        }
+
+        .accordion-panel-inner img {
+            width: 100%;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+        }
+
+        /* ---------- Visor de imágenes a pantalla completa (lightbox) ---------- */
+        .manual-card img,
+        .manual-interface img,
+        .accordion-panel-inner img {
+            cursor: zoom-in;
+            transition: transform 0.35s ease, filter 0.35s ease, box-shadow 0.35s ease;
+        }
+
+        .manual-card img:hover,
+        .manual-interface img:hover,
+        .accordion-panel-inner img:hover {
+            filter: brightness(1.1) saturate(1.1);
+            transform: scale(1.015);
+        }
+
+        .lightbox-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(4, 6, 10, 0);
+            backdrop-filter: blur(0px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 0;
+            pointer-events: none;
+            transition: background 0.4s ease, backdrop-filter 0.4s ease, opacity 0.4s ease;
+        }
+
+        .lightbox-overlay.active {
+            background: rgba(4, 6, 10, 0.93);
+            backdrop-filter: blur(10px);
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .lightbox-glow-a,
+        .lightbox-glow-b {
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+            filter: blur(10px);
+            opacity: 0;
+            transition: opacity 0.6s ease 0.1s;
+        }
+
+        .lightbox-glow-a {
+            width: 350px;
+            height: 350px;
+            top: 8%;
+            left: 6%;
+            background: radial-gradient(circle, rgba(21,109,68,0.35) 0%, rgba(0,0,0,0) 70%);
+        }
+
+        .lightbox-glow-b {
+            width: 420px;
+            height: 420px;
+            bottom: 6%;
+            right: 8%;
+            background: radial-gradient(circle, rgba(75,4,59,0.35) 0%, rgba(0,0,0,0) 70%);
+        }
+
+        .lightbox-overlay.active .lightbox-glow-a,
+        .lightbox-overlay.active .lightbox-glow-b {
+            opacity: 1;
+        }
+
+        .lightbox-img-wrap {
+            position: relative;
+            max-width: 90vw;
+            max-height: 86vh;
+        }
+
+        .lightbox-overlay img {
+            display: block;
+            max-width: 90vw;
+            max-height: 86vh;
+            border-radius: 20px;
+            box-shadow: 0 35px 90px rgba(0,0,0,0.65), 0 0 0 1px rgba(255,255,255,0.07);
+            transform: scale(0.82) translateY(20px);
+            opacity: 0;
+            transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.4s ease;
+            cursor: zoom-out;
+        }
+
+        .lightbox-overlay.active img {
+            transform: scale(1) translateY(0);
+            opacity: 1;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.45);
+            transition: transform 0.25s ease;
+            transform: scale(0) rotate(-90deg);
+        }
+
+        .lightbox-overlay.active .lightbox-close {
+            transform: scale(1) rotate(0deg);
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) 0.15s;
+        }
+
+        .lightbox-close:hover {
+            transform: scale(1.12) rotate(90deg) !important;
+        }
+
+        .lightbox-caption {
+            position: absolute;
+            bottom: -44px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--text-muted);
+            font-size: 0.88rem;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.4s ease 0.2s;
+        }
+
+        .lightbox-overlay.active .lightbox-caption {
+            opacity: 1;
+        }
+
+        .lightbox-hint {
+            position: fixed;
+            bottom: 26px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--text-muted);
+            font-size: 0.78rem;
+            opacity: 0;
+            transition: opacity 0.4s ease 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .lightbox-overlay.active .lightbox-hint {
+            opacity: 0.75;
+        }
+
+        @media (max-width: 600px) {
+            .lightbox-close { top: 10px; right: 10px; }
+            .lightbox-caption { bottom: -34px; font-size: 0.75rem; }
+            .lightbox-hint { bottom: 14px; }
+        }
+
+        .step-list {
+            counter-reset: step;
+            list-style: none;
+        }
+
+        .step-list li {
+            counter-increment: step;
+            position: relative;
+            padding-left: 42px;
+            margin-bottom: 18px;
+            font-size: 0.92rem;
+            color: var(--text-muted);
+        }
+
+        .step-list li::before {
+            content: counter(step);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+            color: #fff;
+            font-weight: 700;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .step-list li strong {
+            color: var(--text-main);
+        }
+
+        /* FAQ */
+        .faq-item {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            margin-bottom: 14px;
+            padding: 18px 22px;
+            cursor: pointer;
+        }
+
+        .faq-item h4 {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.98rem;
+            font-weight: 600;
+        }
+
+        .faq-item h4 i {
+            color: var(--accent-cyan);
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.open h4 i {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s ease;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .faq-item.open .faq-answer {
+            max-height: 200px;
+            margin-top: 12px;
+        }
+
+        .manual-cta {
+            text-align: center;
+            margin-top: 60px;
+            padding: 40px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, rgba(0,198,255,0.08), rgba(0,114,255,0.08));
+            border: 1px solid var(--border-color);
+        }
+
+        .manual-cta h3 {
+            margin-bottom: 12px;
+        }
+
+        .manual-cta p {
+            color: var(--text-muted);
+            max-width: 500px;
+            margin: 0 auto 22px;
+        }
+
+        footer {
+            padding: 30px 8%;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .task-item {
+            background: rgba(255,255,255,0.02);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .task-item.completed strong {
+            text-decoration: line-through;
+            color: var(--text-muted);
+        }
+
+        .task-actions button {
+            border: none;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 5px;
+        }
+
+        .btn-complete { background: var(--success); }
+        .btn-delete { background: var(--danger); }
+
+        .credential-item {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border-color);
+            padding: 15px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+
+        .credential-item .cred-pass {
+            font-family: monospace;
+            color: var(--text-muted);
+        }
+
+        .empty-msg {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+            }
+            .hero-btns {
+                justify-content: center;
+            }
+            nav ul {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="glow-bg"></div>
+    <div class="glow-bg-2"></div>
+
+    <header>
+        <div class="logo-container">
+            <div class="logo-icon"><i class="fa-solid fa-user-check"></i></div>
+            <span class="logo-text">MyProfile</span>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#funciones">Funciones</a></li>
+                <li><a href="#manual">Manual</a></li>
+                <li><a href="#demo">Módulos</a></li>
+                <li><a href="#creditos">Desarrolladores</a></li>
+            </ul>
+        </nav>
+        <a href="#demo" class="btn-main">Probar App</a>
+    </header>
+
+    <section class="hero" id="inicio">
+        <div class="hero-text">
+            <span class="badge"><i class="fa-solid fa-rocket"></i> Versión 1.0 Disponible</span>
+            <h1>Gestiona tu vida en un solo lugar</h1>
+            <p>
+                Esta aplicación fue creada con el objetivo de tener un espacio donde el usuario pueda gestionar diversos aspectos de su día a día ("gestión de ahorros, cuidado de la salud, listado de tareas pendientes y un gestor de contraseñas"). Está aplicación le ayudará a gestionar de una forma más fácil todos estos datos que son útiles pero se olvidan o se pierden fácilmente.
+            </p>
+            <div class="hero-btns">
+                <a href="#demo" class="btn-main">Explorar Módulos</a>
+               <!-- <a href="#creditos" class="btn-secondary">Saber más</a> -->
+            </div>
+        </div>
+
+        <div class="hero-card">
+            <div class="hero-card-header">
+                <div>
+                    <p style="font-size: 0.8rem; color: var(--text-muted);">Dashboard General</p>
+                    <h4 style="font-weight: 600;">Bienvenido de vuelta</h4>
+                </div>
+                <div><span class="status-dot"></span> <small style="color: var(--text-muted);">En línea</small></div>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 15px;">
+                <div style="background: rgba(255,255,255,0.03); padding: 12px; border-radius: 10px; border: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <span style="font-size: 0.8rem; color: var(--text-muted);"><i class="fa-solid fa-list-check" style="color:var(--accent-cyan);"></i> Tareas Pendientes</span>
+                        <p style="font-weight: 600; font-size: 0.95rem;" id="dash-tasks-count">10 Tareas Activas</p>
+                    </div>
+                    <span style="font-size: 0.8rem; color: var(--accent-cyan);" id="dash-tasks-pct">0% completado</span>
+                </div>
+
+                <div style="background: rgba(255,255,255,0.03); padding: 12px; border-radius: 10px; border: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <span style="font-size: 0.8rem; color: var(--text-muted);"><i class="fa-solid fa-wallet" style="color:#f59e0b;"></i> Saldo de Ahorros</span>
+                        <p style="font-weight: 600; font-size: 1.1rem; color: #10b981;" id="dash-balance">$0.00 USD</p>
+                    </div>
+                    <small style="color: var(--text-muted);">Físico</small>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                    <div style="background: rgba(255,255,255,0.03); padding: 10px; border-radius: 10px; border: 1px solid var(--border-color);">
+                        <span style="font-size: 0.75rem; color: var(--text-muted);"><i class="fa-solid fa-droplet" style="color:#3b82f6;"></i> Hidratación</span>
+                        <p style="font-weight: 600; font-size: 0.9rem;" id="dash-water">0 / 8 Vasos</p>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.03); padding: 10px; border-radius: 10px; border: 1px solid var(--border-color);">
+                        <span style="font-size: 0.75rem; color: var(--text-muted);"><i class="fa-solid fa-eye" style="color:#ec4899;"></i> Descanso Visual</span>
+                        <p style="font-weight: 600; font-size: 0.9rem;">Cada 20 min</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features" id="funciones">
+        <h2 class="section-title">Herramientas creadas para tu productividad</h2>
+        <p class="section-subtitle">Diseñado tanto para estudiantes como para el público en general que busca maximizar su tiempo y cuidar su salud física y digital.</p>
+
+        <div class="grid-features">
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fa-solid fa-list-check"></i></div>
+                <h3>Registro de Tareas</h3>
+                <p>Organiza tus actividades en tareas pendientes y completadas. Añade fechas de vencimiento y descripciones personalizadas fácilmente.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fa-solid fa-heart-pulse"></i></div>
+                <h3>Salud y Bienestar</h3>
+                <p>Lleva un registro diario de tus 8 vasos de agua y activa alertas temporizadas para descansar la vista cada 20 minutos de uso continuo.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fa-solid fa-coins"></i></div>
+                <h3>Control de Ahorros</h3>
+                <p>Gestiona tu dinero en efectivo. Registra ingresos y egresos con su respectivo concepto y mantén actualizado tu capital ahorrado.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fa-solid fa-key"></i></div>
+                <h3>Gestor de Contraseñas</h3>
+                <p>Un baúl privado donde guardar tus credenciales de plataformas web con buscador integrado para localizarlas rápidamente.</p>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="manual-section" id="manual">
+        <div class="manual-header">
+            <span class="badge"><i class="fa-solid fa-book-open"></i> Manual de Usuario</span>
+            <h2 class="section-title">Guía completa de MyProfile</h2>
+            <p class="section-subtitle">Aprende a usar cada rincón de la aplicación: desde crear tu cuenta hasta dominar tus tareas, tu salud, tus ahorros y tus contraseñas.</p>
+        </div>
+
+        <!-- Bloque 1: Primeros pasos -->
+        <div class="manual-block">
+            <div class="manual-block-title">
+                <div class="manual-block-num">1</div>
+                <div>
+                    <h3>Primeros pasos</h3>
+                    <span>Crea tu cuenta e inicia sesión en segundos</span>
+                </div>
+            </div>
+            <div class="manual-cards-2">
+                <div class="manual-card">
+                    <img src="imagenes/login.png" alt="Login para iniciar sesión">
+                    <div class="manual-card-body">
+                        <h4><i class="fa-solid fa-right-to-bracket"></i> Inicio de sesión</h4>
+                        <p>Para ingresar a MyProfile necesitas haberte registrado antes. Escribe tu correo electrónico y tu contraseña en los campos correspondientes y pulsa el botón <strong>Iniciar sesión</strong> para acceder a todas las funciones del programa.</p>
+                    </div>
+                </div>
+                <div class="manual-card">
+                    <img src="imagenes/registrador.png" alt="Campos que se deben llenar para registrarse">
+                    <div class="manual-card-body">
+                        <h4><i class="fa-solid fa-user-plus"></i> Creación de cuenta</h4>
+                        <p>Si aún no tienes una cuenta, haz clic en el enlace que dice <strong>"Registrarse"</strong> y completa tus datos personales: nombre de usuario, correo y contraseña. Una vez registrado, podrás iniciar sesión con normalidad.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bloque 2: Interfaz principal -->
+        <div class="manual-block">
+            <div class="manual-block-title">
+                <div class="manual-block-num">2</div>
+                <div>
+                    <h3>Interfaz principal y navegación</h3>
+                    <span>Tu resumen de todas las funcionalidades en un vistazo</span>
+                </div>
+            </div>
+            <div class="manual-interface">
+                    <img src="imagenes/dashboard.png" alt="Pantalla de inicio">
+                <ul class="manual-interface-list">
+                    <li>
+                        <i class="fa-solid fa-compass"></i>
+                        <div>
+                            <strong>Barra de navegación</strong>
+                            <p>En la parte superior encontrarás los botones que te permiten moverte entre todas las ventanas del programa y sus funcionalidades.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-table-cells"></i>
+                        <div>
+                            <strong>Cartas de resumen</strong>
+                            <p>En el centro de la pantalla verás tarjetas dinámicas con información de cada módulo, que se actualizan conforme interactúas con la app.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                        <div>
+                            <strong>Cerrar sesión</strong>
+                            <p>Puedes volver al login en cualquier momento presionando el botón <strong style= "color:red;"> "Salir"</strong>, en la esquina superior derecha.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Bloque 3: Funciones paso a paso (acordeón) -->
+        <div class="manual-block">
+            <div class="manual-block-title">
+                <div class="manual-block-num">3</div>
+                <div>
+                    <h3>Funciones paso a paso</h3>
+                    <span>Haz clic en cada módulo para ver cómo usarlo</span>
+                </div>
+            </div>
+
+            <div class="accordion-item open" id="acc-tareas">
+                <div class="accordion-head" onclick="toggleAccordion('acc-tareas')">
+                    <div class="accordion-head-left">
+                        <div class="accordion-icon-box"><i class="fa-solid fa-list-check"></i></div>
+                        <div>
+                            <h4>Registro de tareas</h4>
+                            <small>Pendientes, completadas y nuevas tareas</small>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-chevron-down accordion-chevron"></i>
+                </div>
+                <div class="accordion-panel">
+                    <div class="accordion-panel-inner">
+                               <img src="imagenes/tareas.png" alt="Pantalla para de registro de tareas">
+
+                        <ol class="step-list">
+                            <li>Pulsa el botón <strong>"+"</strong> ubicado en la parte superior derecha para crear una <strong>tarea nueva</strong>.</li>
+                            <li>Escribe el nombre (ej. "Hacer limpieza") y una descripción breve (ej. "Si no la hago mi mamá me regaña").</li>
+                            <li>Agrega la <strong>fecha de vencimiento</strong> y guarda: la tarea aparecerá ordenada en <strong>Tareas pendientes</strong>.</li>
+                            <li>Cuando la termines, presiona <strong>"Completado"</strong> y pasará automáticamente a <strong>Tareas completadas</strong> (puedes restaurarla si lo necesitas), o elimínala con el botón correspondiente si te equivocaste.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item" id="acc-salud">
+                <div class="accordion-head" onclick="toggleAccordion('acc-salud')">
+                    <div class="accordion-head-left">
+                        <div class="accordion-icon-box"><i class="fa-solid fa-heart-pulse"></i></div>
+                        <div>
+                            <h4>Recordatorios de salud</h4>
+                            <small>Hidratación y descanso visual</small>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-chevron-down accordion-chevron"></i>
+                </div>
+                <div class="accordion-panel">
+                    <div class="accordion-panel-inner">
+
+                    <img src="imagenes/salud.png" alt="Apartado de hidratación y descanso visual">
+
+                        <ol class="step-list">
+                            <li>La app te recuerda beber al menos <strong>8 vasos de agua al día</strong>, enviándote una notificación cada cierto tiempo hasta completarlos.</li>
+                            <li>Cuando tomes agua, pulsa <strong>"Registrar vaso"</strong>: se sumará a tu barra de progreso en el dashboard. Si no lo registras, no se marcará nada.</li>
+                            <li><strong>Descanso visual</strong> (opcional): tras 20 minutos de uso del celular recibirás un aviso para descansar la vista 5 minutos.</li>
+                            <li>Si deseas activar la función de suspender pantalla, al detectarse inactividad después del tiempo establecido por el usuario se apagará la pantalla en el dispositivo (pc o teléfono android).</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item" id="acc-ahorro">
+                <div class="accordion-head" onclick="toggleAccordion('acc-ahorro')">
+                    <div class="accordion-head-left">
+                        <div class="accordion-icon-box"><i class="fa-solid fa-piggy-bank"></i></div>
+                        <div>
+                            <h4>Ahorros</h4>
+                            <small>Controla tu dinero físico, fuera de bancos</small>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-chevron-down accordion-chevron"></i>
+                </div>
+                <div class="accordion-panel">
+                    <div class="accordion-panel-inner">
+                    <img src="imagenes/ahorro.png" alt="Sección de ahorro">
+
+                        <ol class="step-list">
+                            <li>Este módulo sirve para llevar el control de un ahorro <strong>físico</strong> (no bancario ni virtual) que guardas por tu cuenta.</li>
+                            <li>El <strong>saldo actual</strong> se muestra de forma destacada y se calcula automáticamente según tus movimientos.</li>
+                            <li>Ingresa el <strong>monto</strong> y una <strong>descripción</strong> (ej. "Compra en supermercado") en los campos de entrada.</li>
+                            <li>Usa <strong>"+ Ingreso"</strong> para sumar capital o <strong>"- Gasto"</strong> para registrar una salida; todo queda ordenado en <strong>Últimas transacciones</strong>.</li>
+                            <li>Si se cometió una equivocación al momento de registrar una transacción puedes apretar el botón de <strong>"Editar"</strong> para registrar los cambios. Y si deseas eliminar algo del historial puedes dar click en <strong>"Eliminar"</strong> para quitarlo.</li>
+
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item" id="acc-pass">
+                <div class="accordion-head" onclick="toggleAccordion('acc-pass')">
+                    <div class="accordion-head-left">
+                        <div class="accordion-icon-box"><i class="fa-solid fa-key"></i></div>
+                        <div>
+                            <h4>Gestor de contraseñas</h4>
+                            <small>Tu bóveda privada de credenciales</small>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-chevron-down accordion-chevron"></i>
+                </div>
+                <div class="accordion-panel">
+                    <div class="accordion-panel-inner">
+                                            <img src="imagenes/contrasenas.png" alt="Ventana de contraseñas">
+
+                        <ol class="step-list">
+                            <li>Entra al módulo <strong>Contraseñas</strong> desde el menú superior y usa la barra <strong>"Buscar credencial..."</strong> para filtrar tus cuentas guardadas mientras escribes.</li>
+                            <li>Pulsa el botón <strong>"+"</strong> para abrir la ventana <strong>"Nueva credencial"</strong>.</li>
+                            <li>Completa <strong>Sitio web</strong> (ej. Gmail, Netflix), <strong>Usuario/Cuenta</strong> (ej. usuario@email.com) y <strong>Clave</strong>.</li>
+                            <li>Presiona <strong>"Guardar"</strong> para almacenarla, o <strong>"Cancelar"</strong> para cerrar sin guardar cambios.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bloque 4: FAQ -->
+        <div class="manual-block">
+            <div class="manual-block-title">
+                <div class="manual-block-num">4</div>
+                <div>
+                    <h3>Preguntas frecuentes</h3>
+                    <span>Resuelve tus dudas más comunes</span>
+                </div>
+            </div>
+
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <h4>¿En qué dispositivos puedo usar MyProfile? <i class="fa-solid fa-chevron-down"></i></h4>
+                <div class="faq-answer"><p>MyProfile está disponible tanto para computadoras como para dispositivos móviles, así que puedes llevar tu organización contigo a todas partes.</p></div>
+            </div>
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <h4>¿Necesito crear una cuenta para usar la app? <i class="fa-solid fa-chevron-down"></i></h4>
+                <div class="faq-answer"><p>Sí. Debes registrarte una sola vez con tu nombre de usuario, correo y contraseña desde la opción "Registrarse"; después podrás iniciar sesión siempre que quieras.</p></div>
+            </div>
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <h4>¿Qué pasa si no registro un vaso de agua? <i class="fa-solid fa-chevron-down"></i></h4>
+                <div class="faq-answer"><p>Si no marcas manualmente el vaso de agua con el botón correspondiente, ese consumo no se refleja en tu barra de progreso del dashboard.</p></div>
+            </div>
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <h4>¿El módulo de ahorros se conecta a mi banco? <i class="fa-solid fa-chevron-down"></i></h4>
+                <div class="faq-answer"><p>No, es un espacio pensado para llevar el control de tu ahorro físico (efectivo), no un ahorro virtual ni bancario.</p></div>
+            </div>
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <h4>¿Puedo recuperar una tarea que ya marqué como completada? <i class="fa-solid fa-chevron-down"></i></h4>
+                <div class="faq-answer"><p>Sí, desde la sección de Tareas completadas puedes restaurarla para volver a trabajarla más tarde.</p></div>
+            </div>
+        </div>
+
+        <div class="manual-cta">
+            <h3>¿Listo para organizar tu día a día?</h3>
+            <p>Prueba los módulos de MyProfile ahora mismo en la sección interactiva y descubre lo fácil que es mantener tus tareas, tu salud, tus ahorros y tus contraseñas en un solo lugar.</p>
+            <a href="#demo" class="btn-main"><i class="fa-solid fa-arrow-down"></i> Ir a la prueba interactiva</a>
+        </div>
+    </section>
+
+    <section class="demo-section" id="demo">
+        <h2 class="section-title" style="text-align: center; margin-bottom: 10px;">Explora la Interfaz</h2>
+        <p class="section-subtitle" style="text-align: center;">Haz clic en cada pestaña para previsualizar el funcionamiento del sistema MyProfile.</p>
+
+        <div class="tabs">
+            <button class="tab-btn active" onclick="openTab(event, 'tab-tareas')"><i class="fa-solid fa-tasks"></i> Tareas</button>
+            <button class="tab-btn" onclick="openTab(event, 'tab-salud')"><i class="fa-solid fa-notes-medical"></i> Salud</button>
+            <button class="tab-btn" onclick="openTab(event, 'tab-ahorro')"><i class="fa-solid fa-piggy-bank"></i> Ahorros</button>
+            <button class="tab-btn" onclick="openTab(event, 'tab-pass')"><i class="fa-solid fa-lock"></i> Contraseñas</button>
+        </div>
+
+        <!-- Tab 1: Tareas -->
+        <div id="tab-tareas" class="tab-content active">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h3>Mis Tareas</h3>
+                <button class="btn-main" style="padding:6px 12px;" onclick="addTask()"><i class="fa-solid fa-plus"></i> Nueva Tarea</button>
+            </div>
+            <div id="tasks-list"></div>
+        </div>
+
+        <!-- Tab 2: Salud -->
+        <div id="tab-salud" class="tab-content">
+            <h3>Salud y Bienestar</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px;">Mantén hábitos saludables mientras estudias o trabajas en tu computador.</p>
+
+            <div style="background: rgba(255,255,255,0.02); padding: 20px; border-radius: 12px; border: 1px solid var(--border-color); margin-bottom: 20px;">
+                <h4><i class="fa-solid fa-glass-water" style="color: var(--accent-cyan);"></i> Control de Hidratación</h4>
+                <p style="margin: 10px 0; color: var(--text-muted);">Vasos ingeridos hoy: <strong id="water-count">0 / 8 vasos</strong></p>
+                <button style="background: var(--accent-cyan); color: #000; border: none; padding: 10px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; width: 100%;" onclick="addWater()">+ Registrar Vaso de Agua</button>
+            </div>
+
+            <div style="background: rgba(255,255,255,0.02); padding: 20px; border-radius: 12px; border: 1px solid var(--border-color);">
+                <h4><i class="fa-solid fa-eye" style="color: #ec4899;"></i> Recordatorio de Descanso Visual</h4>
+                <p style="margin: 10px 0; color: var(--text-muted);">Descansa la vista 5 minutos cada 20 minutos de uso de pantalla.</p>
+                <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                    <input type="checkbox" id="rest-toggle" checked style="accent-color: var(--accent-cyan);" onchange="toggleRest()"> Activar recordatorio de descanso
+                </label>
+                <p id="rest-status" style="margin-top:8px; font-size:0.8rem; color: var(--success);">Recordatorio activado.</p>
+            </div>
+        </div>
+
+        <!-- Tab 3: Ahorros -->
+        <div id="tab-ahorro" class="tab-content">
+            <h3>Control de Ahorros</h3>
+            <div style="text-align: center; margin: 20px 0;">
+                <span style="color: var(--text-muted); font-size: 0.9rem;">Saldo Actual Acumulado</span>
+                <h2 style="font-size: 2.5rem; color: var(--success);" id="balance-display">$0.00</h2>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px;">
+                <input type="number" id="amount-input" placeholder="Monto (Ej. 5.00)" style="background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); padding: 10px; border-radius: 8px; color: #fff;">
+                <input type="text" id="desc-input" placeholder="Descripción (Ej: Compra supermercado)" style="background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); padding: 10px; border-radius: 8px; color: #fff;">
+            </div>
+
+            <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+                <button style="flex: 1; background: var(--success); color:#fff; border:none; padding: 10px; border-radius: 8px; font-weight:bold; cursor:pointer;" onclick="addTransaction('income')">+ Ingreso</button>
+                <button style="flex: 1; background: var(--danger); color:#fff; border:none; padding: 10px; border-radius: 8px; font-weight:bold; cursor:pointer;" onclick="addTransaction('expense')">- Gasto</button>
+            </div>
+
+            <div id="transactions-list"></div>
+        </div>
+
+        <!-- Tab 4: Contraseñas -->
+        <div id="tab-pass" class="tab-content">
+            <h3>Gestor Privado de Contraseñas</h3>
+            <input type="text" id="cred-search" placeholder="🔍 Buscar credencial..." style="width: 100%; background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); padding: 12px; border-radius: 8px; color: #fff; margin: 15px 0;" oninput="renderCredentials()">
+
+            <div id="credentials-list"></div>
+
+            <div style="text-align:center; margin-top: 15px;">
+                <button class="btn-main" style="border-radius: 20px; padding: 8px 18px;" onclick="addCredential()">+ Agregar Nueva Credencial</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="credits-section" id="creditos">
+        <div class="credits-card">
+            <span class="badge">Proyecto Académico 2026</span>
+            <h2>Instituto Nacional Cantón Lourdes (INDEL)</h2>
+            <p style="color: var(--text-muted); margin-top: 10px;">
+                Desarrollado para la materia de <strong>Tecnología III</strong> | Grado: <strong>3° Desarrollo de Software “B”</strong>
+            </p>
+            <p style="color: var(--text-muted); font-size: 0.9rem;">Docente orientador: <strong>Javier Arturo García Mineros</strong></p>
+
+            <h3 style="margin-top: 30px; font-size: 1.1rem; color: var(--accent-cyan);">Equipo de Aprendientes:</h3>
+
+            <div class="students-list">
+                <div class="student-item">
+                    <i class="fa-solid fa-code"></i>
+                    <strong>Manuel Ernesto Castillo Guerra</strong>
+                    <p style="color: var(--text-muted); font-size: 0.8rem;">N° Lista: 17</p>
+                </div>
+                <div class="student-item">
+                    <i class="fa-solid fa-code"></i>
+                    <strong>René Antonio Orellana Garcia</strong>
+                    <p style="color: var(--text-muted); font-size: 0.8rem;">N° Lista: 27</p>
+                </div>
+                <div class="student-item">
+                    <i class="fa-solid fa-code"></i>
+                    <strong>Daniel Ernesto Claros Orellana</strong>
+                    <p style="color: var(--text-muted); font-size: 0.8rem;">N° Lista: 18</p>
+                </div>
+                <div class="student-item">
+                    <i class="fa-solid fa-code"></i>
+                    <strong>Mayeli Abigail Villalobos Guardado</strong>
+                    <p style="color: var(--text-muted); font-size: 0.8rem;">N° Lista: 12</p>
+                </div>
+            </div>
+        </div>
+    </section>
+<footer>
+    <!-- BOTÓN PARA DESCARGAR EL MANUAL DE USUARIO FINAL -->
+    <a href="pdf/manual_usuario_final_myprofile.pdf" download class="btn-main" style="display: inline-flex; align-items: center; gap: 8px;">
+        <i class="fa-solid fa-file-pdf"></i>
+        Descargar Manual (PDF)
+    </a>
+
+    <div style="margin-top: 12px;">
+        <strong>MyProfile v1.0</strong> — Disponible para PC y Dispositivos Móviles.
+    </div>
+    
+    <div>
+        © 2026 NEXO - El Salvador. Todos los derechos reservados.
+    </div>
+</footer>
+    <script>
+        // ---------- Estado de la aplicación (en memoria) ----------
+        let tasks = [
+            { id: 1, text: "Verificar los problemas de ID", due: "07/09/2026", completed: false },
+            { id: 2, text: "Agregar OpenAI al sistema", due: "08/09/2026", completed: false }
+        ];
+        let nextTaskId = 3;
+
+        let waterCount = 0;
+        const waterGoal = 8;
+        let restActive = true;
+
+        let balance = 0;
+        let transactions = [];
+        let nextTxId = 1;
+
+        let credentials = [];
+        let nextCredId = 1;
+
+        // ---------- Pestañas ----------
+        function openTab(evt, tabName) {
+            document.querySelectorAll(".tab-content").forEach(el => el.classList.remove("active"));
+            document.querySelectorAll(".tab-btn").forEach(el => el.classList.remove("active"));
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
+
+        // ---------- Tareas ----------
+        function renderTasks() {
+            const list = document.getElementById("tasks-list");
+            list.innerHTML = "";
+
+            if (tasks.length === 0) {
+                list.innerHTML = '<div class="empty-msg"><p style="color: var(--text-muted);">No hay tareas registradas.</p></div>';
+            } else {
+                tasks.forEach(t => {
+                    const item = document.createElement("div");
+                    item.className = "task-item" + (t.completed ? " completed" : "");
+                    item.innerHTML = `
+                        <div>
+                            <strong>${escapeHtml(t.text)}</strong>
+                            <p style="font-size: 0.8rem; color: ${t.completed ? 'var(--success)' : 'var(--danger)'};">
+                                ${t.completed ? 'Completada' : 'Vence: ' + escapeHtml(t.due)}
+                            </p>
+                        </div>
+                        <div class="task-actions">
+                            <button class="btn-complete" onclick="completeTask(${t.id})">${t.completed ? 'Reabrir' : 'Completar'}</button>
+                            <button class="btn-delete" onclick="deleteTask(${t.id})">Eliminar</button>
+                        </div>
+                    `;
+                    list.appendChild(item);
+                });
+            }
+
+            const total = tasks.length;
+            const done = tasks.filter(t => t.completed).length;
+            const pct = total === 0 ? 0 : Math.round((done / total) * 100);
+            document.getElementById("dash-tasks-count").textContent = `${total} Tareas Activas`;
+            document.getElementById("dash-tasks-pct").textContent = `${pct}% completado`;
+        }
+
+        function addTask() {
+            const text = prompt("Descripción de la nueva tarea:");
+            if (!text) return;
+            const due = prompt("Fecha de vencimiento (dd/mm/aaaa):", "");
+            tasks.push({ id: nextTaskId++, text: text, due: due || "Sin fecha", completed: false });
+            renderTasks();
+        }
+
+        function completeTask(id) {
+            const t = tasks.find(t => t.id === id);
+            if (t) t.completed = !t.completed;
+            renderTasks();
+        }
+
+        function deleteTask(id) {
+            tasks = tasks.filter(t => t.id !== id);
+            renderTasks();
+        }
+
+        // ---------- Salud ----------
+        function addWater() {
+            if (waterCount < waterGoal) waterCount++;
+            document.getElementById("water-count").textContent = `${waterCount} / ${waterGoal} vasos`;
+            document.getElementById("dash-water").textContent = `${waterCount} / ${waterGoal} Vasos`;
+        }
+
+        function toggleRest() {
+            restActive = document.getElementById("rest-toggle").checked;
+            const status = document.getElementById("rest-status");
+            status.textContent = restActive ? "Recordatorio activado." : "Recordatorio desactivado.";
+            status.style.color = restActive ? "var(--success)" : "var(--danger)";
+        }
+
+        // ---------- Ahorros ----------
+        function renderTransactions() {
+            const list = document.getElementById("transactions-list");
+            list.innerHTML = "";
+            if (transactions.length === 0) return;
+
+            transactions.slice().reverse().forEach(tx => {
+                const item = document.createElement("div");
+                item.className = "task-item";
+                const sign = tx.type === "income" ? "+" : "-";
+                const color = tx.type === "income" ? "var(--success)" : "var(--danger)";
+                item.innerHTML = `
+                    <div>
+                        <strong>${escapeHtml(tx.desc)}</strong>
+                    </div>
+                    <div style="color:${color}; font-weight:600;">${sign}$${tx.amount.toFixed(2)}</div>
+                `;
+                list.appendChild(item);
+            });
+        }
+
+        function addTransaction(type) {
+            const amountInput = document.getElementById("amount-input");
+            const descInput = document.getElementById("desc-input");
+            const amount = parseFloat(amountInput.value);
+
+            if (isNaN(amount) || amount <= 0) {
+                alert("Ingresa un monto válido.");
+                return;
+            }
+
+            const desc = descInput.value.trim() || (type === "income" ? "Ingreso sin descripción" : "Gasto sin descripción");
+
+            if (type === "expense" && amount > balance) {
+                if (!confirm("El gasto supera tu saldo actual. ¿Registrar de todas formas?")) return;
+            }
+
+            balance += (type === "income" ? amount : -amount);
+            transactions.push({ id: nextTxId++, type, amount, desc });
+
+            amountInput.value = "";
+            descInput.value = "";
+
+            updateBalanceDisplay();
+            renderTransactions();
+        }
+
+        function updateBalanceDisplay() {
+            document.getElementById("balance-display").textContent = `$${balance.toFixed(2)}`;
+            document.getElementById("dash-balance").textContent = `$${balance.toFixed(2)} USD`;
+        }
+
+        // ---------- Contraseñas ----------
+        function renderCredentials() {
+            const list = document.getElementById("credentials-list");
+            const query = document.getElementById("cred-search").value.toLowerCase();
+            const filtered = credentials.filter(c => c.site.toLowerCase().includes(query) || c.user.toLowerCase().includes(query));
+
+            list.innerHTML = "";
+
+            if (credentials.length === 0) {
+                list.innerHTML = `
+                    <div class="empty-msg">
+                        <i class="fa-solid fa-shield-halved" style="font-size: 2rem; color: var(--accent-cyan); margin-bottom: 10px; display:block;"></i>
+                        <p style="color: var(--text-muted);">No hay credenciales registradas aún.</p>
+                    </div>`;
+                return;
+            }
+
+            if (filtered.length === 0) {
+                list.innerHTML = '<div class="empty-msg"><p style="color: var(--text-muted);">Sin resultados para tu búsqueda.</p></div>';
+                return;
+            }
+
+            filtered.forEach(c => {
+                const item = document.createElement("div");
+                item.className = "credential-item";
+                item.innerHTML = `
+                    <div>
+                        <strong>${escapeHtml(c.site)}</strong>
+                        <p style="font-size:0.8rem; color: var(--text-muted);">${escapeHtml(c.user)}</p>
+                    </div>
+                    <div style="display:flex; align-items:center; gap:10px;">
+                        <span class="cred-pass" id="pass-${c.id}">••••••••</span>
+                        <button class="btn-complete" style="padding:5px 8px;" onclick="togglePass(${c.id})"><i class="fa-solid fa-eye"></i></button>
+                        <button class="btn-delete" style="padding:5px 8px;" onclick="deleteCredential(${c.id})"><i class="fa-solid fa-trash"></i></button>
+                    </div>
+                `;
+                list.appendChild(item);
+            });
+        }
+
+        function addCredential() {
+            const site = prompt("Nombre del sitio o plataforma:");
+            if (!site) return;
+            const user = prompt("Usuario o correo:", "");
+            const pass = prompt("Contraseña:", "");
+            credentials.push({ id: nextCredId++, site, user: user || "", pass: pass || "" });
+            renderCredentials();
+        }
+
+        function togglePass(id) {
+            const c = credentials.find(c => c.id === id);
+            const span = document.getElementById(`pass-${id}`);
+            if (!c || !span) return;
+            span.textContent = span.textContent === "••••••••" ? c.pass : "••••••••";
+        }
+
+        function deleteCredential(id) {
+            credentials = credentials.filter(c => c.id !== id);
+            renderCredentials();
+        }
+
+        // ---------- Manual: Acordeón de funciones ----------
+        function toggleAccordion(id) {
+            const item = document.getElementById(id);
+            const panel = item.querySelector(".accordion-panel");
+            const isOpen = item.classList.contains("open");
+
+            document.querySelectorAll(".accordion-item").forEach(el => {
+                el.classList.remove("open");
+                el.querySelector(".accordion-panel").style.maxHeight = null;
+            });
+
+            if (!isOpen) {
+                item.classList.add("open");
+                panel.style.maxHeight = panel.scrollHeight + "px";
+            }
+        }
+
+        // ---------- Manual: Preguntas frecuentes ----------
+        function toggleFaq(el) {
+            const wasOpen = el.classList.contains("open");
+            document.querySelectorAll(".faq-item").forEach(f => f.classList.remove("open"));
+            if (!wasOpen) el.classList.add("open");
+        }
+
+        // Abrir el primer acordeón (Tareas) por defecto al cargar
+        window.addEventListener("load", () => {
+            const first = document.getElementById("acc-tareas");
+            if (first) {
+                const panel = first.querySelector(".accordion-panel");
+                panel.style.maxHeight = panel.scrollHeight + "px";
+            }
+        });
+
+        // ---------- Utilidad ----------
+        function escapeHtml(str) {
+            const div = document.createElement("div");
+            div.textContent = str;
+            return div.innerHTML;
+        }
+
+        // ---------- Visor de imágenes a pantalla completa ----------
+        (function initLightbox() {
+            const overlay = document.createElement("div");
+            overlay.className = "lightbox-overlay";
+            overlay.innerHTML = `
+                <div class="lightbox-glow-a"></div>
+                <div class="lightbox-glow-b"></div>
+                <div class="lightbox-img-wrap">
+                    <img src="" alt="">
+                    <div class="lightbox-close"><i class="fa-solid fa-xmark"></i></div>
+                    <div class="lightbox-caption"></div>
+                </div>
+                <div class="lightbox-hint"><i class="fa-solid fa-arrows-left-right"></i> Clic afuera o Esc para cerrar</div>
+            `;
+            document.body.appendChild(overlay);
+
+            const lbImg = overlay.querySelector(".lightbox-img-wrap img");
+            const lbCaption = overlay.querySelector(".lightbox-caption");
+            const lbClose = overlay.querySelector(".lightbox-close");
+
+            function openLightbox(src, alt) {
+                lbImg.src = src;
+                lbImg.alt = alt || "";
+                lbCaption.textContent = alt || "";
+                overlay.classList.add("active");
+                document.body.style.overflow = "hidden";
+            }
+
+            function closeLightbox() {
+                overlay.classList.remove("active");
+                document.body.style.overflow = "";
+            }
+
+            document
+                .querySelectorAll(".manual-card img, .manual-interface img, .accordion-panel-inner img")
+                .forEach(img => {
+                    img.addEventListener("click", () => openLightbox(img.src, img.alt));
+                });
+
+            overlay.addEventListener("click", e => {
+                if (e.target === overlay || e.target === lbImg || e.target.closest(".lightbox-glow-a, .lightbox-glow-b")) {
+                    closeLightbox();
+                }
+            });
+            lbClose.addEventListener("click", closeLightbox);
+
+            document.addEventListener("keydown", e => {
+                if (e.key === "Escape") closeLightbox();
+            });
+        })();
+
+        // ---------- Inicialización ----------
+        renderTasks();
+        renderCredentials();
+        updateBalanceDisplay();
+
+        // ---------- Descargar PDF ----------
+function downloadPDF() {
+    // Cuando tengas el PDF, cambia esta URL por la ruta real de tu archivo
+    const pdfUrl = 'pdf/manual_usuario_final_myprofile.pdf';
+    
+    // Verificar si el archivo existe (opcional, pero recomendado)
+    fetch(pdfUrl, { method: 'HEAD' })
+        .then(response => {
+            if (response.ok) {
+                // Si el archivo existe, lo descarga
+                const link = document.createElement('a');
+                link.href = pdfUrl;
+                link.download = 'manual-myprofile.pdf';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            } else {
+                // Si no existe, muestra un mensaje amigable
+                alert('📄 El manual PDF estará disponible próximamente. ¡Estamos trabajando en él!');
+            }
+        })
+        .catch(() => {
+            alert('📄 El manual PDF estará disponible próximamente. ¡Estamos trabajando en él!');
+        });
+}
+    </script>
+</body>
+</html>
