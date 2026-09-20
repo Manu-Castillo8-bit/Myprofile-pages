@@ -1,2 +1,1 @@
-﻿Version
-APK nuevo - v1.1 - 20/09/2026 - registro arreglado (38,590,716 bytes)
+﻿MyProfile_v1.2.apk (38,255,970 bytes) - 20/09/2026 - fix RLS + alta de cuentas nuevas
