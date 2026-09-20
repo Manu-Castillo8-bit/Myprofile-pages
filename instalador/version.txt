@@ -1,1 +1,1 @@
-﻿MyProfile_v1.2.apk (38,255,970 bytes) - 20/09/2026 - fix RLS + alta de cuentas nuevas
+﻿MyProfile_v1.3.apk (38,598,908 bytes) - 20/09/2026 - auto-reparacion esquema + fix alta de cuentas
