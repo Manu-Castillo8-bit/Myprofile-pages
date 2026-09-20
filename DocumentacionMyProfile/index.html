@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>MyProfile · Explorador del Proyecto (Documentación)</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo-orb"></span>
+      <div class="brand-text">
+        <h1>MyProfile <span class="brand-light">· Explorador del Proyecto</span></h1>
+        <p>Documentación completa del código fuente, estilo Explorador de soluciones de Visual Studio</p>
+      </div>
+    </div>
+    <div class="stats">
+      <div class="stat"><b id="stat-clases">—</b><span>Clases</span></div>
+      <div class="stat"><b id="stat-metodos">—</b><span>Métodos</span></div>
+      <div class="stat"><b id="stat-paquetes">—</b><span>Paquetes</span></div>
+      <div class="stat"><b>4</b><span>Plataformas</span></div>
+    </div>
+  </header>
+
+  <main class="layout">
+
+    <!-- ────────────────── Panel lateral (Explorador de soluciones) ────────────────── -->
+    <aside class="sidebar">
+      <div class="side-head">
+        <span>Explorador de soluciones</span>
+        <button id="btnColapsar" title="Contraer todo">⏸</button>
+      </div>
+      <div class="search-wrap">
+        <input id="buscar" type="text" placeholder="Buscar clase, método, archivo…" />
+      </div>
+
+      <div id="arbol" class="arbol"></div>
+
+      <div class="side-foot">
+        <p>Solución «Proyecto» (1 de 1 proyecto)</p>
+      </div>
+    </aside>
+
+    <!-- ────────────────── Panel principal (Detalle) ────────────────── -->
+    <section class="main">
+      <div class="breadcrumb" id="migas"></div>
+      <div class="contenido" id="contenido">
+        <div class="cargando">Cargando documentación…</div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="content.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

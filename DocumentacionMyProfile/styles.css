@@ -1,0 +1,286 @@
+/* ============================================================
+   MyProfile · Documentación — Estilos
+   Tema oscuro inspirado en la propia app (#0B1120) y en el
+   Explorador de soluciones de Visual Studio.
+   ============================================================ */
+
+:root {
+  --bg0: #070c18;
+  --bg1: #0b1120;
+  --bg2: #111c30;
+  --bg3: #172033;
+  --bg4: #1e1e2e;
+  --border: #245b78;
+  --border-soft: #1c2b42;
+  --texto: #e6edf7;
+  --texto2: #8e8e93;
+  --azul: #2563eb;
+  --azul2: #4f46e5;
+  --cian: #38bdf8;
+  --dorado: #ffd700;
+  --verde: #34c759;
+  --rojo: #ff3b30;
+  --morado: #a78bfa;
+  --fuente: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body { height: 100%; }
+
+body {
+  font-family: var(--fuente);
+  background:
+    radial-gradient(1200px 500px at 80% -10%, rgba(37, 99, 235, .18), transparent 60%),
+    radial-gradient(900px 500px at 0% 110%, rgba(79, 70, 229, .14), transparent 60%),
+    var(--bg0);
+  color: var(--texto);
+  overflow: hidden;
+}
+
+/* ───────────── Barra superior ───────────── */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 14px 24px;
+  background: linear-gradient(180deg, rgba(23, 32, 51, .95), rgba(17, 28, 48, .9));
+  border-bottom: 1px solid var(--border-soft);
+  position: relative;
+  z-index: 5;
+}
+.brand { display: flex; align-items: center; gap: 14px; min-width: 0; }
+.logo-orb {
+  width: 42px; height: 42px; border-radius: 12px; flex: 0 0 auto;
+  background:
+    radial-gradient(circle at 30% 30%, #38bdf8, transparent 60%),
+    linear-gradient(135deg, var(--azul2), var(--azul));
+  box-shadow: 0 0 22px rgba(56, 189, 248, .55);
+  animation: orb 4s ease-in-out infinite alternate;
+}
+@keyframes orb {
+  from { transform: scale(1) rotate(0deg); box-shadow: 0 0 18px rgba(56,189,248,.45); }
+  to   { transform: scale(1.06) rotate(4deg); box-shadow: 0 0 30px rgba(56,189,248,.75); }
+}
+.brand-text h1 { font-size: 20px; font-weight: 700; letter-spacing: .3px; }
+.brand-light { color: var(--texto2); font-weight: 400; }
+.brand-text p { font-size: 12.5px; color: var(--texto2); margin-top: 2px; }
+
+.stats { display: flex; gap: 10px; flex: 0 0 auto; }
+.stat {
+  background: var(--bg3); border: 1px solid var(--border-soft); border-radius: 12px;
+  padding: 6px 16px; text-align: center; min-width: 84px;
+  transition: transform .15s ease, border-color .15s ease;
+}
+.stat:hover { transform: translateY(-2px); border-color: var(--border); }
+.stat b { display: block; font-size: 19px; color: var(--cian); }
+.stat span { font-size: 10.5px; color: var(--texto2); text-transform: uppercase; letter-spacing: .5px; }
+
+/* ───────────── Diseño de dos columnas ───────────── */
+.layout {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  height: calc(100vh - 92px);
+}
+
+/* ───────────── Barra lateral ───────────── */
+.sidebar {
+  background: var(--bg1);
+  border-right: 1px solid var(--border-soft);
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+.side-head {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 16px; font-size: 12px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .8px; color: var(--texto2);
+  border-bottom: 1px solid var(--border-soft); background: var(--bg2);
+}
+.side-head button {
+  background: var(--bg3); color: var(--texto2); border: 1px solid var(--border-soft);
+  border-radius: 8px; padding: 2px 10px; cursor: pointer; font-size: 12px;
+}
+.side-head button:hover { color: var(--texto); border-color: var(--border); }
+
+.search-wrap { padding: 10px 12px; border-bottom: 1px solid var(--border-soft); }
+.search-wrap input {
+  width: 100%; background: var(--bg3); color: var(--texto);
+  border: 1px solid var(--border-soft); border-radius: 9px; padding: 9px 12px;
+  font-size: 13px; outline: none; transition: border-color .15s ease;
+}
+.search-wrap input::placeholder { color: #64748b; }
+.search-wrap input:focus { border-color: var(--azul); }
+
+.arbol { flex: 1; overflow: auto; padding: 8px 8px 20px; min-height: 0; }
+.arbol::-webkit-scrollbar { width: 9px; }
+.arbol::-webkit-scrollbar-thumb { background: #23334d; border-radius: 6px; }
+.arbol::-webkit-scrollbar-track { background: transparent; }
+
+/* Nodos del árbol */
+.nodo { user-select: none; }
+.fila-nodo {
+  display: flex; align-items: center; gap: 7px;
+  padding: 5px 8px; border-radius: 8px; cursor: pointer;
+  font-size: 13px; color: var(--texto); line-height: 1.25;
+  transition: background .12s ease;
+}
+.fila-nodo:hover { background: rgba(56, 189, 248, .09); }
+.fila-nodo.activo {
+  background: linear-gradient(90deg, rgba(37, 99, 235, .35), rgba(37, 99, 235, .12));
+  color: #fff;
+}
+.flecha {
+  width: 14px; flex: 0 0 14px; text-align: center;
+  color: var(--texto2); font-size: 10px; display: inline-block;
+  transition: transform .15s ease;
+}
+.fila-nodo.abierto .flecha { transform: rotate(90deg); }
+.ico { font-size: 15px; flex: 0 0 auto; width: 20px; text-align: center; }
+.etiqueta { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.etiqueta .tipo {
+  color: var(--texto2); font-size: 10.5px; margin-left: 4px; font-weight: 400;
+}
+.hijos { margin-left: 12px; padding-left: 10px; border-left: 1px solid var(--border-soft); overflow: hidden; }
+
+.hijos.oculto { display: none; }
+
+.side-foot { padding: 10px 16px; border-top: 1px solid var(--border-soft); }
+.side-foot p { font-size: 11px; color: var(--texto2); }
+
+/* ───────────── Panel principal ───────────── */
+.main { display: flex; flex-direction: column; min-width: 0; min-height: 0; background: rgba(7, 12, 24, .6); }
+
+.breadcrumb {
+  display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
+  padding: 10px 22px; font-size: 12px; color: var(--texto2);
+  border-bottom: 1px solid var(--border-soft); background: var(--bg2);
+  min-height: 42px;
+}
+.breadcrumb .sep { color: #3d4f6b; }
+.breadcrumb .cr-actual { color: var(--cian); font-weight: 600; }
+
+.contenido {
+  flex: 1; overflow: auto; padding: 26px 30px 60px; min-height: 0;
+}
+.contenido::-webkit-scrollbar { width: 10px; }
+.contenido::-webkit-scrollbar-thumb { background: #23334d; border-radius: 6px; }
+.contenido::-webkit-scrollbar-track { background: transparent; }
+
+/* ───────────── Contenido renderizado ───────────── */
+.doc h2.titulo-nodo {
+  font-size: 24px; margin-bottom: 4px; display: flex; align-items: center; gap: 10px;
+  background: linear-gradient(90deg, #fff, #9fc5ff);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.doc .subtitulo-nodo { color: var(--texto2); font-size: 13.5px; margin-bottom: 18px; }
+
+.doc h3 {
+  margin: 26px 0 10px; font-size: 16.5px; color: var(--cian);
+  padding-bottom: 6px; border-bottom: 1px solid var(--border-soft);
+  display: flex; align-items: center; gap: 8px;
+}
+.doc h4 { margin: 18px 0 8px; font-size: 14.5px; color: var(--dorado); }
+.doc p { font-size: 14px; line-height: 1.7; margin: 9px 0; color: #c9d4e3; }
+.doc li { font-size: 14px; line-height: 1.7; margin: 5px 0; color: #c9d4e3; }
+.doc ul, .doc ol { padding-left: 22px; margin: 8px 0; }
+.doc li::marker { color: var(--cian); }
+
+.doc b, .doc strong { color: #fff; }
+.doc code {
+  background: var(--bg4); color: #7ee2ff; padding: 2px 7px; border-radius: 6px;
+  font-family: "Cascadia Code", Consolas, monospace; font-size: 12.5px;
+  border: 1px solid #26344f;
+}
+.doc a { color: var(--cian); }
+
+.doc table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 13px; }
+.doc th {
+  text-align: left; background: var(--bg3); color: var(--texto);
+  padding: 9px 12px; border: 1px solid var(--border-soft); font-weight: 600;
+}
+.doc td { padding: 8px 12px; border: 1px solid var(--border-soft); color: #c9d4e3; vertical-align: top; }
+.doc tr:nth-child(even) td { background: rgba(23, 32, 51, .45); }
+
+.doc pre {
+  background: #0d1220; border: 1px solid #26344f; border-radius: 12px;
+  padding: 14px 16px; overflow: auto; margin: 12px 0; position: relative;
+}
+.doc pre::before {
+  content: attr(data-lang); position: absolute; top: 6px; right: 10px;
+  font-size: 10px; color: #5566a0; text-transform: uppercase; letter-spacing: 1px;
+}
+.doc pre code { background: none; border: none; color: #c8d6ef; font-size: 12.5px; line-height: 1.6; }
+
+/* Tarjetas especiales */
+.caja {
+  border-radius: 14px; padding: 14px 18px; margin: 14px 0;
+  border: 1px solid var(--border-soft); background: var(--bg2);
+  font-size: 13.5px; line-height: 1.65; color: #c9d4e3;
+}
+.caja.idea    { border-left: 4px solid var(--dorado); }
+.caja.dato    { border-left: 4px solid var(--cian); }
+.caja.cuidado { border-left: 4px solid var(--rojo); }
+.caja.exito   { border-left: 4px solid var(--verde); }
+.caja .titulo-caja {
+  display: block; font-weight: 700; font-size: 12px; text-transform: uppercase;
+  letter-spacing: 1px; margin-bottom: 6px; color: var(--texto);
+}
+
+.chip {
+  display: inline-block; background: var(--bg3); border: 1px solid var(--border-soft);
+  border-radius: 999px; padding: 3px 12px; font-size: 12px; color: var(--texto2); margin: 3px 4px 3px 0;
+}
+.chip.b { border-color: var(--azul); color: var(--cian); }
+.chip.v { border-color: var(--verde); color: var(--verde); }
+.chip.r { border-color: var(--rojo); color: var(--rojo); }
+.chip.d { border-color: var(--dorado); color: var(--dorado); }
+
+.metodo {
+  background: var(--bg2); border: 1px solid var(--border-soft); border-radius: 12px;
+  padding: 13px 16px; margin: 10px 0;
+}
+.metodo .mm { font-family: "Cascadia Code", Consolas, monospace; color: #7ee2ff; font-size: 13px; display: block; }
+.metodo .md { font-size: 13.5px; color: #c9d4e3; margin-top: 6px; line-height: 1.65; }
+.metodo .mt { font-size: 11px; color: var(--texto2); text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 3px; }
+
+.destacado {
+  background: linear-gradient(120deg, rgba(37,99,235,.22), rgba(79,70,229,.15));
+  border: 1px solid var(--azul); border-radius: 14px; padding: 16px 20px; margin: 16px 0;
+}
+.destacado h3 { border: none; margin: 0 0 8px; }
+
+.etiqueta-archivo {
+  display: inline-flex; align-items: center; gap: 6px; background: var(--bg3);
+  border: 1px solid var(--border); border-radius: 8px; padding: 4px 12px;
+  font-family: "Cascadia Code", Consolas, monospace; font-size: 12.5px; color: var(--texto);
+  margin: 2px 4px 2px 0;
+}
+.etiqueta-archivo small { color: var(--texto2); }
+
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+@media (max-width: 900px) { .grid-2 { grid-template-columns: 1fr; } }
+
+.cargando { color: var(--texto2); font-size: 14px; padding: 40px; text-align: center; }
+
+.resaltar { background: #2b3b5e; border-radius: 3px; }
+
+/* Barra de progreso decorativa */
+.flow { display: flex; align-items: stretch; gap: 6px; margin: 18px 0; flex-wrap: wrap; }
+.flow .paso {
+  flex: 1; min-width: 120px; background: var(--bg3); border: 1px solid var(--border-soft);
+  border-radius: 12px; padding: 12px; text-align: center; position: relative;
+}
+.flow .paso b { display: block; color: var(--cian); font-size: 13px; margin-bottom: 4px; }
+.flow .paso span { font-size: 11.5px; color: var(--texto2); }
+.flow .paso::after {
+  content: "→"; position: absolute; right: -12px; top: 50%; transform: translateY(-50%);
+  color: var(--azul); font-weight: 700;
+}
+.flow .paso:last-child::after { content: ""; }
+
+.firma {
+  margin-top: 40px; padding-top: 16px; border-top: 1px solid var(--border-soft);
+  font-size: 12px; color: var(--texto2); text-align: center;
+}
