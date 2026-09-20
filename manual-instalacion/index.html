@@ -363,6 +363,16 @@
   }
   .zoomable-img:hover{opacity:.92;}
 
+  /* ---- Ajuste para las capturas verticales de Android ---- */
+  #instalacion-android .shot {
+    max-width: 280px;
+    margin-top: 14px;
+  }
+  #instalacion-android .zoomable-img {
+    max-height: 520px;
+    object-fit: contain;
+  }
+
   /* ---- Lightbox Modal ---- */
   .modal{
     display:none;
@@ -620,10 +630,10 @@
               <div class="step-node"><span class="step-index">01</span></div>
               <div class="step-body">
                 <h4>Descargar el archivo APK</h4>
-                <p>Descarga el paquete de instalación <code style="color: white;">MyProfile.apk</code> en tu teléfono desde el enlace proporcionado o transfiérelo a la memoria del dispositivo.</p>
+                <p>Descarga el archivo de instalación desde la página web <code style="color: white;">MyProfile.apk</code> en tu teléfono. Mostrará un mensaje que es psoible que el archivo sea dañino, pero es normal, pues es una medida de seguridad porque descargas un archivo desde un sitio web.s</p>
                 <div class="shot">
                   <div class="shot-bar"><span class="tl red"></span><span class="tl yellow"></span><span class="tl green"></span><span class="shot-name">android-paso1.png</span></div>
-                  <img src="./imagenes/android-paso1.png" alt="Paso 1 Android: Descargar o ubicar archivo APK" class="zoomable-img" onclick="openModal(this)">
+                  <img src="./imagenes/android/1.jpeg" alt="Paso 1 Android: Descargar el archivo APK" class="zoomable-img" onclick="openModal(this)">
                 </div>
               </div>
             </div>
@@ -631,11 +641,11 @@
             <div class="step">
               <div class="step-node"><span class="step-index">02</span></div>
               <div class="step-body">
-                <h4>Permitir orígenes desconocidos</h4>
-                <p>Si es la primera vez que instalas una app fuera de Google Play, ve a <strong>Ajustes &gt; Seguridad</strong> (o activa la opción desde el navegador/administrador de archivos) para autorizar la instalación de fuentes desconocidas.</p>
+                <h4>Descarga iniciada</h4>
+                <p>Acá verás que la app comienza a descargarse y debes de saber que una vez descargado debes dar click en la notificación para que comienze a instalarse.</p>
                 <div class="shot">
                   <div class="shot-bar"><span class="tl red"></span><span class="tl yellow"></span><span class="tl green"></span><span class="shot-name">android-paso2.png</span></div>
-                  <img src="./imagenes/android-paso2.png" alt="Paso 2 Android: Habilitar orígenes desconocidos" class="zoomable-img" onclick="openModal(this)">
+                  <img src="./imagenes/android/2.jpeg" alt="Paso 2 Android: Descarga iniciada" class="zoomable-img" onclick="openModal(this)">
                 </div>
               </div>
             </div>
@@ -644,10 +654,10 @@
               <div class="step-node"><span class="step-index">03</span></div>
               <div class="step-body">
                 <h4>Abrir el archivo APK</h4>
-                <p>Abre el administrador de archivos de tu teléfono, dirígete a la carpeta <strong>Descargas</strong> y pulsa sobre el archivo <code>.apk</code>.</p>
+                <p>Después de dar click en la notificación de que se descargo el programa, se nos abrirá la ventana de instalación y seguimos los pasos.</p>
                 <div class="shot">
                   <div class="shot-bar"><span class="tl red"></span><span class="tl yellow"></span><span class="tl green"></span><span class="shot-name">android-paso3.png</span></div>
-                  <img src="./imagenes/android-paso3.png" alt="Paso 3 Android: Ejecutar el archivo APK" class="zoomable-img" onclick="openModal(this)">
+                  <img src="./imagenes/android/3.jpeg" alt="Paso 3 Android: Abrir el archivo APK" class="zoomable-img" onclick="openModal(this)">
                 </div>
               </div>
             </div>
@@ -656,10 +666,10 @@
               <div class="step-node"><span class="step-index">04</span></div>
               <div class="step-body">
                 <h4>Confirmar la instalación</h4>
-                <p>Aparecerá un mensaje emergente solicitando la confirmación. Pulsa sobre la opción <strong>Instalar</strong>.</p>
+                <p>Después de dar click en <code style="color: white;">Instalar</code> comenzará la instalación.</p>
                 <div class="shot">
                   <div class="shot-bar"><span class="tl red"></span><span class="tl yellow"></span><span class="tl green"></span><span class="shot-name">android-paso4.png</span></div>
-                  <img src="./imagenes/android-paso4.png" alt="Paso 4 Android: Confirmar botón de instalación" class="zoomable-img" onclick="openModal(this)">
+                  <img src="./imagenes/android/4.jpeg" alt="Paso 4 Android: Confirmar la instalación" class="zoomable-img" onclick="openModal(this)">
                 </div>
               </div>
             </div>
@@ -667,11 +677,47 @@
             <div class="step">
               <div class="step-node"><span class="step-index">05</span></div>
               <div class="step-body">
-                <h4>Abrir la aplicación</h4>
-                <p>Una vez completado el proceso, presiona <strong>Abrir</strong> para iniciar la aplicación MyProfile en tu dispositivo Android.</p>
+                <h4>Analizar con Google Play Protect</h4>
+                <p>Algunos dispositivos nos pediran que analicemos la app con Google Play Protect, para descartar la presencia de virus en ella.</p>
                 <div class="shot">
                   <div class="shot-bar"><span class="tl red"></span><span class="tl yellow"></span><span class="tl green"></span><span class="shot-name">android-paso5.png</span></div>
-                  <img src="./imagenes/android-paso5.png" alt="Paso 5 Android: Aplicación instalada y abierta" class="zoomable-img" onclick="openModal(this)">
+                  <img src="./imagenes/android/5.jpeg" alt="Paso 5 Android: Analizar con Google Play Protect" class="zoomable-img" onclick="openModal(this)">
+                </div>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-node"><span class="step-index">06</span></div>
+              <div class="step-body">
+                <h4>Analizar o continuar sin analizar</h4>
+                <p>Acá puedes hacer 2 cosas, puedes dar click en <code style="color:white;">Analizar</code>, si quieres descartar la presencia de algun virus, o dar click en <code style="color: white;">Ver más detalles, y continuar sin analizar</code> para ir directamente a instalar la app.  </p>
+                <div class="shot">
+                  <div class="shot-bar"><span class="tl red"></span><span class="tl yellow"></span><span class="tl green"></span><span class="shot-name">android-paso6.png</span></div>
+                  <img src="./imagenes/android/6.jpeg" alt="Paso 6 Android: Analizar o continuar sin analizar" class="zoomable-img" onclick="openModal(this)">
+                </div>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-node"><span class="step-index">07</span></div>
+              <div class="step-body">
+                <h4>Analisis completo</h4>
+                <p>Si decidiste analizarla con Google Play Protect, veras que despues de ello te permitira instalarla sin ningún riesgo, y si no lo hiciste puedes saltar este paso.</p>
+                <div class="shot">
+                  <div class="shot-bar"><span class="tl red"></span><span class="tl yellow"></span><span class="tl green"></span><span class="shot-name">android-paso7.png</span></div>
+                  <img src="./imagenes/android/7.jpeg" alt="Paso 7 Android: Analisis completo" class="zoomable-img" onclick="openModal(this)">
+                </div>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-node"><span class="step-index">08</span></div>
+              <div class="step-body">
+                <h4>Instalación completa</h4>
+                <p>Una vez instalada puedes buscarla como una aplicación normal con el nombre de <code style="color: white;">Proyecto</code> y comenzar a usarla</p>
+                <div class="shot">
+                  <div class="shot-bar"><span class="tl red"></span><span class="tl yellow"></span><span class="tl green"></span><span class="shot-name">android-paso8.png</span></div>
+                  <img src="./imagenes/android/8.jpeg" alt="Paso 8 Android: Instalación completa" class="zoomable-img" onclick="openModal(this)">
                 </div>
               </div>
             </div>
