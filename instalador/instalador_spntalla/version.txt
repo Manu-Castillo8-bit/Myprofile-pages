@@ -1,0 +1,2 @@
+MyProfile_v1.3.2 (suspender pantalla) - 21/09/2026
+Fix boton "Suspender ahora" en PC: ahora la accion del toast se atiende correctamente y suspende el equipo.
