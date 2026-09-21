@@ -1,0 +1,2 @@
+MyProfile_v1.4 (Panel de administración) - 21/09/2026
+Nuevo panel de administración: cuenta admin entra directo al panel; CRUD completo de usuarios (editar nombre, cambiar rol, eliminar cuenta) y de sus datos (tareas, movimientos de ahorro, contraseñas y recordatorios), búsqueda de usuarios, botón salir y avatares con iniciales.
