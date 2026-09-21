@@ -1,1 +1,1 @@
-﻿MyProfile_v1.3.apk (38,598,908 bytes) - 20/09/2026 - auto-reparacion esquema + fix alta de cuentas
+﻿MyProfile_v1.3.apk (36,8 MB) - 20/09/2026 - fix recordatorios: deduplicacion local + esquema Supabase
